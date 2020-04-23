@@ -1,0 +1,12 @@
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\bin\Debug\ClientCShop0.exe.config
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\bin\Debug\ClientCShop0.exe
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\bin\Debug\ClientCShop0.pdb
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\bin\Debug\WatsonWebsocket.dll
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.csprojAssemblyReference.cache
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.Form1.resources
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.Properties.Resources.resources
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.csproj.GenerateResource.cache
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.csproj.CoreCompileInputs.cache
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.csproj.CopyComplete
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.exe
+C:\Devel\Git\SampleWebSocket\Client\ClientCShop0\ClientCShop0\obj\Debug\ClientCShop0.pdb
