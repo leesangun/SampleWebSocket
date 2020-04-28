@@ -1,0 +1,21 @@
+{
+  "name": "server-socket-io",
+  "version": "0.0.0",
+  "description": "ServerSocketIO",
+  "main": "app.js",
+  "author": {
+    "name": ""
+  },
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean"
+  },
+  "devDependencies": {
+    "@types/node": "^8.0.14",
+    "ts-node": "^8.9.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  }
+}
