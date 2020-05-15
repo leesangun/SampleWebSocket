@@ -38,7 +38,11 @@
     <TypeScriptCompile Include="Client.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="ConnectRedis.ts" />
     <TypeScriptCompile Include="Protocol.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="Room.ts">
       <SubType>Code</SubType>
     </TypeScriptCompile>
   </ItemGroup>

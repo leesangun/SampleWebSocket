@@ -1,24 +1,10 @@
-    <ul id="messages"></ul>
-    <form action="">
-        <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
+<script>
+var count = 1;
+function openClient(){
+	var win = window.open("client.html","Client"+count, "width=300,height=500");
+	count++;
+}
 
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js"></script>
-    <script>
-        $(function () {
-            var socket = io('http://localhost:3000');
-            var username = "iiii";
+</script>
 
-            $('form').submit(function(){
-                var content = $('#m').val();
-                socket.emit('message', {username: username, content: content});
-                $('#m').val('');
-                return false;
-            });
-
-            socket.on('message', function(msg){
-                $('#messages').append($('<li>').text('[' + msg.username + ']: ' + msg.content));
-            });
-        });
-    </script>
+<button onClick="openClient()">½ÇÇà</button>

@@ -1,0 +1,3 @@
+C:\Devel\Git\SampleWebSocket\Server\SocketIO\TS\ServerSocketIO\ServerSocketIO\obj\Debug\ServerSocketIO.njsprojAssemblyReference.cache
+C:\Devel\Git\SampleWebSocket\Server\SocketIO\TS\ServerSocketIO\ServerSocketIO\obj\Debug\ServerSocketIO.njsproj.CoreCompileInputs.cache
+C:\Devel\Git\SampleWebSocket\Server\SocketIO\TS\ServerSocketIO\ServerSocketIO\bin\Microsoft.NodejsTools.WebRole.dll
