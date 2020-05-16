@@ -6,6 +6,27 @@ var PackageClient;
         destroy() {
             this._room = undefined;
         }
+        setPos(state, x, y, z) {
+            this._state = state;
+            this._pxPrev = this._px;
+            this._pyPrev = this._py;
+            this._pzPrev = this._pz;
+            this._px = x;
+            this._py = y;
+            this._pz = z;
+        }
+        isPosChange() {
+            if (this._px === undefined) {
+                return false;
+            }
+            var result = !(this._pxPrev === this._px &&
+                this._pyPrev === this._py &&
+                this._pzPrev === this._pz);
+            this._pxPrev = this._px;
+            this._pyPrev = this._py;
+            this._pzPrev = this._pz;
+            return result;
+        }
     }
     PackageClient.Client = Client;
 })(PackageClient = exports.PackageClient || (exports.PackageClient = {}));

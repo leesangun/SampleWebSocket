@@ -12,11 +12,11 @@ export namespace PackageProtocol {
 
 
     export interface ReqMatch {
-
+        nickname: string;
     }
 
     export class ResMatch {
-
+        users: any[] = [];
     }
     export let resMatch: ResMatch = new ResMatch();
 
@@ -24,4 +24,21 @@ export namespace PackageProtocol {
         count_user: number;
     }
     export let resMatchWait: ResMatchWait = new ResMatchWait();
+
+    export interface ReqStatePlayer {
+        state:number, //0 move  1 stop
+        px: number,
+        py: number,
+        pz: number,
+    }
+
+    export class ResStateEnemy {
+        states: any[] = [];
+    }
+    export let resStateEnemy: ResStateEnemy = new ResStateEnemy();
+
+    export class ResDisconnectOpp {
+        nickname: string;
+    }
+    export let resDisconnectOpp: ResDisconnectOpp = new ResDisconnectOpp();
 }
