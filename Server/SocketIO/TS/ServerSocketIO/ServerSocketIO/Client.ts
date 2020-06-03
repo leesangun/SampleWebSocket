@@ -18,14 +18,15 @@ export namespace PackageClient {
         private _pzPrev: number;
 
         public _state: number;
-
+        public _direction: number;
 
         public destroy() {
             this._room = undefined;
         }
 
-        public setPos(state: number, x: number, y: number, z: number) {
+        public setPos(state: number,direction:number, x: number, y: number, z: number) {
             this._state = state;
+            this._direction = direction;
 
             this._pxPrev = this._px;
             this._pyPrev = this._py;

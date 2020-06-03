@@ -1,3 +1,5 @@
+//아래 두개가 서로 될 때 안될 때가 있음
+//var io = require('./socket.io.js');
 var io = require('./socket.io');
 
 /*
@@ -107,15 +109,24 @@ ClientSocketIO.prototype = {
         );
     },
 
-    reqStatePlayer: function (state,px,py,pz){
+    reqStatePlayer: function (state,direction,px,py,pz){
         this._socket.emit("ReqStatePlayer", 
             {
                 state:state,
+                direction:direction,
                 px: px,
                 py: py,
                 pz: pz,
             }
         );
+    },
+
+    getServerTime: function () {
+        return new Date().getTime() - this.timeGap;
+    },
+
+    setServerTime: function (serverTime) {
+        this.timeGap = new Date().getTime() - serverTime;
     },
 };
 

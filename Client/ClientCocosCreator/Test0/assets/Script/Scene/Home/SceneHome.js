@@ -35,7 +35,7 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        $_GET = this.getGetData();
+        var $_GET = this.getGetData();
         ClientSocketIO.nickname = $_GET["nickname"];
 
         this.clientSocketIO = ClientSocketIO.getInstance(this,"AppController.sessionKey");
@@ -55,6 +55,7 @@ cc.Class({
             }
             case "ResMatch":{
                 ClientSocketIO.resMatch = data;
+                this.clientSocketIO.setServerTime(data.server_time);
                  cc.director.loadScene("Play");
                 break;
             }

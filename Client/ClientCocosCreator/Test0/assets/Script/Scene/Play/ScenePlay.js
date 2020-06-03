@@ -81,6 +81,7 @@ cc.Class({
         var self = this;
         this.buttonL.node.on(cc.Node.EventType.TOUCH_START, function(event){
             self.player._moveDirect = 1;
+            self.reqStateStart();
         });
         this.buttonL.node.on(cc.Node.EventType.TOUCH_END, function(event){
             self.reqStateStop();
@@ -88,6 +89,7 @@ cc.Class({
 
         this.buttonR.node.on(cc.Node.EventType.TOUCH_START, function(event){
             self.player._moveDirect = 2;
+            self.reqStateStart();
         });
         this.buttonR.node.on(cc.Node.EventType.TOUCH_END, function(event){
             self.reqStateStop();
@@ -95,6 +97,7 @@ cc.Class({
 
         this.buttonF.node.on(cc.Node.EventType.TOUCH_START, function(event){
             self.player._moveDirect = 3;
+            self.reqStateStart();
         });
         this.buttonF.node.on(cc.Node.EventType.TOUCH_END, function(event){
             self.reqStateStop();
@@ -102,6 +105,7 @@ cc.Class({
 
         this.buttonB.node.on(cc.Node.EventType.TOUCH_START, function(event){
             self.player._moveDirect = 4;
+            self.reqStateStart();
         });
         this.buttonB.node.on(cc.Node.EventType.TOUCH_END, function(event){
             self.reqStateStop();
@@ -116,7 +120,7 @@ cc.Class({
         var callback = function () {
             if(self.player._moveDirect !== 0){
                 pPosition = self.player.node.position;
-                self._clientSocketIO.reqStatePlayer(0,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
+                self._clientSocketIO.reqStatePlayer(1,self.player._moveDirect,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
             }
             
         }
@@ -142,10 +146,16 @@ cc.Class({
     
      },
 
+     reqStateStart(){
+         console.log("start");
+        var pPosition = this.player.node.position;
+        this._clientSocketIO.reqStatePlayer(0,this.player._moveDirect,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
+    },
+
     reqStateStop(){
         this.player._moveDirect = 0;
         var pPosition = this.player.node.position;
-        this._clientSocketIO.reqStatePlayer(1,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
+        this._clientSocketIO.reqStatePlayer(2,this.player._moveDirect,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
     },
 
     start () {
@@ -164,7 +174,7 @@ cc.Class({
                     self._enemys.forEach(function(enemy){
                         if(element.nickname === enemy._nickname){
                            // enemy.node.position = cc.v3(element.x,element.y,element.z);
-                            enemy.setPos(element.state, cc.v3(element.x,element.y,element.z));
+                            enemy.setPos(element.state,element.direction, cc.v3(element.x,element.y,element.z));
                         }
                             
                     });

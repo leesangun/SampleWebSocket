@@ -26,51 +26,72 @@ cc.Class({
         //     }
         // },
 
-        _posPrev:cc.v3,
-        _pos:cc.v3,
+        // _posPrev:cc.v3,
+        // _pos:cc.v3,
+        _direction:-1,
+        _state:2,
     },
 
-    // LIFE-CYCLE CALLBACKS:
-
-    // onLoad () {},
-
-    start () {
-        this._pos = null;
-        this._posPrev = null;
-    },
 
     update (dt) {
-        if(this._posPrev === null)return;
+        
 
        // this.node.position = this.node.position + ((this._pos - this._posPrev) * dt); 
-       this.node.position = cc.v3(
-            this.node.position.x + ((this._pos.x - this._posPrev.x) * dt),
-            this.node.position.y + ((this._pos.y - this._posPrev.y) * dt),
-            this.node.position.z + ((this._pos.z - this._posPrev.z) * dt)
-        ); 
-    },
-
-    //현재 위치 = 이전 위치 + ( 속도 * 시간 ) + ( 1 / 2 * 가속도 * 시간 ^ 2 )
-    setPos(state,pos){
-        this.node.position = pos;
-        
-        switch(state){
-            case 0:{
-                this._posPrev = this._pos;
-                break;
-            }
-            case 1:{
-                this._posPrev = null;
-                break;
+        if(this._state === 0 || this._state === 1){
+            switch(this._direction){
+                case 1:{
+                   // console.log(this.node.position.x);
+                    //this.node.position.x -= dt;
+                    this.node.position = cc.v3(this.node.position.x-dt,this.node.position.y,this.node.position.z);
+                    break;
+                }
+                case 2:{
+                     this.node.position = cc.v3(this.node.position.x+dt,this.node.position.y,this.node.position.z);
+                     break;
+                 }
+                 case 3:{
+                    this.node.position = cc.v3(this.node.position.x,this.node.position.y,this.node.position.z-dt);
+                    break;
+                }
+                case 4:{
+                    this.node.position = cc.v3(this.node.position.x,this.node.position.y,this.node.position.z+dt);
+                    break;
+                }
             }
         }
         
-        this._pos = pos;
-
-        // if(this._posPrev !== null){
-        //     console.log(this._posPrev);console.log(this._pos);
-        //     console.log(cc.v3(this._pos.x - this._posPrev.x,this._pos.y - this._posPrev.y,this._pos.z - this._posPrev.z));
+        // else if(this._state === 1){
+        //     if(this._posPrev === null)return;
+        //     this.node.position = cc.v3(
+        //         this.node.position.x + ((this._pos.x - this._posPrev.x) * dt),
+        //         this.node.position.y + ((this._pos.y - this._posPrev.y) * dt),
+        //         this.node.position.z + ((this._pos.z - this._posPrev.z) * dt)
+        //     ); 
         // }
+
+
+
+    },
+
+    //현재 위치 = 이전 위치 + ( 속도 * 시간 ) + ( 1 / 2 * 가속도 * 시간 ^ 2 )
+    setPos(state,direction,pos){
+        this.node.position = pos;
+      //  console.log(state + " " + pos.x);
+        this._state = state;
+        this._direction = direction;
+        // switch(state){
+        //     case 1:{
+        //         this._posPrev = this._pos;
+        //         break;
+        //     }
+        //     case 2:{
+        //         this._posPrev = null;
+        //         break;
+        //     }
+        // }
+        
+        //this._pos = pos;
+
     },
 
 });

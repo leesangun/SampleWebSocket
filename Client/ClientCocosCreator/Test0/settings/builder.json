@@ -1,5 +1,7 @@
 {
-  "excludeScenes": [],
+  "excludeScenes": [
+    "2d2f792f-a40c-49bb-a189-ed176a246e49"
+  ],
   "orientation": {
     "landscapeLeft": true,
     "landscapeRight": true,
@@ -7,7 +9,37 @@
     "upsideDown": false
   },
   "packageName": "org.cocos2d.helloworld",
-  "startScene": "2d2f792f-a40c-49bb-a189-ed176a246e49",
-  "title": "hello_world",
-  "webOrientation": "auto"
+  "startScene": "4c5650be-9d18-4a70-8941-e2ab069f688f",
+  "title": "SampleSocketIO",
+  "webOrientation": "auto",
+  "includeSDKBox": false,
+  "inlineSpriteFrames": true,
+  "inlineSpriteFrames_native": true,
+  "mergeStartScene": false,
+  "optimizeHotUpdate": false,
+  "md5Cache": true,
+  "encryptJs": true,
+  "xxteaKey": "fc8944a7-8c98-41",
+  "zipCompressJs": true,
+  "fb-instant-games": {},
+  "android": {
+    "packageName": "org.cocos2d.demo"
+  },
+  "ios": {
+    "packageName": "org.cocos2d.demo"
+  },
+  "mac": {
+    "packageName": "org.cocos2d.demo"
+  },
+  "win32": {},
+  "android-instant": {
+    "REMOTE_SERVER_ROOT": "",
+    "host": "",
+    "packageName": "org.cocos2d.demo",
+    "pathPattern": "",
+    "recordPath": "",
+    "scheme": "https",
+    "skipRecord": false
+  },
+  "appBundle": false
 }

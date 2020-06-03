@@ -6,8 +6,9 @@ var PackageClient;
         destroy() {
             this._room = undefined;
         }
-        setPos(state, x, y, z) {
+        setPos(state, direction, x, y, z) {
             this._state = state;
+            this._direction = direction;
             this._pxPrev = this._px;
             this._pyPrev = this._py;
             this._pzPrev = this._pz;

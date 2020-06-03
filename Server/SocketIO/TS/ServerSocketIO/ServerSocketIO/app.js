@@ -49,7 +49,7 @@ io.on("connection", (socketClient) => {
                     io.sockets.in(socketClient.clientObject._room._roomId).emit('ResDisconnectOpp', Protocol_1.PackageProtocol.resDisconnectOpp);
                 }
             }
-            else {
+            else if (io.sockets.adapter.rooms[socketClient.clientObject._roomId] !== undefined) {
                 Protocol_1.PackageProtocol.resMatchWait.count_user = io.sockets.adapter.rooms[socketClient.clientObject._roomId].length;
                 io.sockets.in(countRoom).emit('ResMatchWait', Protocol_1.PackageProtocol.resMatchWait);
             }
@@ -68,6 +68,7 @@ io.on("connection", (socketClient) => {
             var keySockets = io.sockets.adapter.rooms[countRoom].sockets;
             var socket;
             var i = 0;
+            Protocol_1.PackageProtocol.resMatch.server_time = new Date().getTime();
             Protocol_1.PackageProtocol.resMatch.users = [];
             for (var keySocket in keySockets) {
                 socket = io.sockets.sockets[keySocket];
@@ -98,6 +99,7 @@ io.on("connection", (socketClient) => {
                             {
                                 nickname: socket.clientObject._nickname,
                                 state: socket.clientObject._state,
+                                direction: socket.clientObject._direction,
                                 x: socket.clientObject._px,
                                 y: socket.clientObject._py,
                                 z: socket.clientObject._pz,
@@ -117,7 +119,22 @@ io.on("connection", (socketClient) => {
     });
     socketClient.on("ReqStatePlayer", (req) => {
         //console.log(req);
-        socketClient.clientObject.setPos(req.state, req.px, req.py, req.pz);
+        socketClient.clientObject.setPos(req.state, req.direction, req.px, req.py, req.pz);
+        /*
+        if (req.state === 0) {
+            PackageProtocol.resStateEnemy.states = [];
+            PackageProtocol.resStateEnemy.states[0] =
+            {
+                nickname: socketClient.clientObject._nickname,
+                state: socketClient.clientObject._state,
+                direction: socketClient.clientObject._direction,
+                x: socketClient.clientObject._px,
+                y: socketClient.clientObject._py,
+                z: socketClient.clientObject._pz,
+            };
+            socketClient.in(socketClient.clientObject._room._roomId).emit('ResStateEnemy', PackageProtocol.resStateEnemy); //���� �뿡 �ִ� �ش�Ŭ�󻩰� ������
+        }
+        */
     });
     socketClient.on("message", (req) => {
         // console.log(req);

@@ -16,6 +16,7 @@ export namespace PackageProtocol {
     }
 
     export class ResMatch {
+        server_time: number;
         users: any[] = [];
     }
     export let resMatch: ResMatch = new ResMatch();
@@ -26,10 +27,12 @@ export namespace PackageProtocol {
     export let resMatchWait: ResMatchWait = new ResMatchWait();
 
     export interface ReqStatePlayer {
-        state:number, //0 move  1 stop
+        state: number, //0 start 1 move  2 stop
+        direction:number,
         px: number,
         py: number,
         pz: number,
+        //방향 액션시점시간 속도
     }
 
     export class ResStateEnemy {
