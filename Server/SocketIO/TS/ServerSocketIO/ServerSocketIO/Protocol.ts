@@ -28,7 +28,8 @@ export namespace PackageProtocol {
 
     export interface ReqStatePlayer {
         state: number, //0 start 1 move  2 stop
-        direction:number,
+        direction: number,
+        speed:number,
         px: number,
         py: number,
         pz: number,
@@ -36,7 +37,14 @@ export namespace PackageProtocol {
     }
 
     export class ResStateEnemy {
-        states: any[] = [];
+        nickname: string;
+        state: number;
+        direction: number;
+        speed: number;
+        px: number;
+        py: number;
+        pz: number;
+       // time: number;
     }
     export let resStateEnemy: ResStateEnemy = new ResStateEnemy();
 

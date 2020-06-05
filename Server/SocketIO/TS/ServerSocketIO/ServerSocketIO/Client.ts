@@ -1,4 +1,5 @@
 import { PackageRoom } from "./Room"; 
+import { PackageProtocol } from "./Protocol";
 export namespace PackageClient { 
     export interface BaseClient {
 
@@ -9,52 +10,49 @@ export namespace PackageClient {
         public _roomId: number; //join이 되고 매칭이 안되었을 때 사용
         public _nickname: string;
 
-        public _px: number;
-        public _py: number;
-        public _pz: number;
-
+        public _req: PackageProtocol.ReqStatePlayer;
+        /*
         private _pxPrev: number;
         private _pyPrev: number;
         private _pzPrev: number;
-
-        public _state: number;
-        public _direction: number;
+        */
 
         public destroy() {
             this._room = undefined;
         }
 
-        public setPos(state: number,direction:number, x: number, y: number, z: number) {
-            this._state = state;
-            this._direction = direction;
+        public setPos(req: PackageProtocol.ReqStatePlayer) {
+        /*
+            if (this._req !== undefined) {
+                this._pxPrev = this._req.px;
+                this._pyPrev = this._req.py;
+                this._pzPrev = this._req.pz;
+            }
+            */
 
-            this._pxPrev = this._px;
-            this._pyPrev = this._py;
-            this._pzPrev = this._pz;
+            this._req = req;
 
-            this._px = x;
-            this._py = y;
-            this._pz = z;
         }
-
+        /*
         public isPosChange(): boolean {
-            if (this._px === undefined) {
+            if (this._req === undefined) {
                 return false;
             }
 
             var result = !(
-                this._pxPrev === this._px &&
-                this._pyPrev === this._py &&
-                this._pzPrev === this._pz
+                this._pxPrev === this._req.px &&
+                this._pyPrev === this._req.py &&
+                this._pzPrev === this._req.pz
             );
+            
 
-
-            this._pxPrev = this._px;
-            this._pyPrev = this._py;
-            this._pzPrev = this._pz;
+            this._pxPrev = this._req.px;
+            this._pyPrev = this._req.py;
+            this._pzPrev = this._req.pz;
 
             return result;
         }
+        */
     }
 
 

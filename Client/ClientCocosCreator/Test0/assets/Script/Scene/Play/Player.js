@@ -26,6 +26,7 @@ cc.Class({
         // },
 
         _moveDirect:0,      //0 stop  1 left  2 right  3 front  4 back
+        _speed:1,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -33,7 +34,7 @@ cc.Class({
     // onLoad () {},
 
     start () {
-
+        this._speed = 2;
     },
 
     update (dt) {
@@ -41,19 +42,20 @@ cc.Class({
             case 1:{
                // console.log(this.node.position.x);
                 //this.node.position.x -= dt;
-                this.node.position = cc.v3(this.node.position.x-dt,this.node.position.y,this.node.position.z);
+               // this.node.position = cc.v3(this.node.position.x-(dt*this._speed),this.node.position.y,this.node.position.z);
+                this.node.x = this.node.position.x-(dt*this._speed);
                 break;
             }
             case 2:{
-                 this.node.position = cc.v3(this.node.position.x+dt,this.node.position.y,this.node.position.z);
+                this.node.x = this.node.position.x+(dt*this._speed);
                  break;
              }
              case 3:{
-                this.node.position = cc.v3(this.node.position.x,this.node.position.y,this.node.position.z-dt);
+                this.node.z = this.node.position.z-(dt*this._speed);
                 break;
             }
             case 4:{
-                this.node.position = cc.v3(this.node.position.x,this.node.position.y,this.node.position.z+dt);
+                this.node.z = this.node.position.z+(dt*this._speed);
                 break;
             }
         }

@@ -36,6 +36,8 @@ cc.Class({
 
         root3d:cc.Node,
 
+        labelTime:cc.Label,
+
         player:Player,
         _enemys:{
             default: [], 
@@ -116,13 +118,11 @@ cc.Class({
             }
         });
 
-        var pPosition;
         var callback = function () {
             if(self.player._moveDirect !== 0){
-                pPosition = self.player.node.position;
-                self._clientSocketIO.reqStatePlayer(1,self.player._moveDirect,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
+                self.reqStartPlayer(1);
             }
-            
+            self.labelTime.string = self._clientSocketIO.getServerTime();
         }
         this.schedule(callback, 1);
 
@@ -148,14 +148,17 @@ cc.Class({
 
      reqStateStart(){
          console.log("start");
-        var pPosition = this.player.node.position;
-        this._clientSocketIO.reqStatePlayer(0,this.player._moveDirect,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
-    },
+        this.reqStartPlayer(0);
+     },
 
     reqStateStop(){
         this.player._moveDirect = 0;
+        this.reqStartPlayer(2);
+    },
+
+    reqStartPlayer(state){
         var pPosition = this.player.node.position;
-        this._clientSocketIO.reqStatePlayer(2,this.player._moveDirect,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
+        this._clientSocketIO.reqStatePlayer(state,this.player._moveDirect,this.player._speed,pPosition.x.toFixed(2) , pPosition.y.toFixed(2), pPosition.z.toFixed(2));
     },
 
     start () {
@@ -169,15 +172,25 @@ cc.Class({
         
         switch(key){
             case "ResStateEnemy":{
+                /*
                 var self = this;
+                
                 data.states.forEach(function(element){
-                    self._enemys.forEach(function(enemy){
+                    self._enemys.forEach(function(enemy){console.log(key + " " + element.nickname);
                         if(element.nickname === enemy._nickname){
                            // enemy.node.position = cc.v3(element.x,element.y,element.z);
-                            enemy.setPos(element.state,element.direction, cc.v3(element.x,element.y,element.z));
+                          // console.log(element);
+                            enemy.setPos(element.state,element.direction,element.speed, cc.v3(element.px,element.py,element.pz));
                         }
                             
                     });
+                });
+                */
+               this._enemys.forEach(function(enemy){
+                    if(data.nickname === enemy._nickname){
+                        enemy.setPos(data.state,data.direction,data.speed, cc.v3(data.px,data.py,data.pz));//,data.time);
+                    }
+                        
                 });
                 break;
             }

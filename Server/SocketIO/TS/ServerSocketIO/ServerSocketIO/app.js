@@ -82,35 +82,37 @@ io.on("connection", (socketClient) => {
             }
             io.sockets.in(countRoom).emit('ResMatch', Protocol_1.PackageProtocol.resMatch);
             countRoom++;
+            /*
             var roomId = socketClient.clientObject._room._roomId;
-            socketClient.clientObject._room.startSchedule0(function () {
-                if (io.sockets.adapter.rooms[roomId] === undefined) {
-                    console.log("room sch error");
-                    return;
-                }
-                Protocol_1.PackageProtocol.resStateEnemy.states = [];
-                var keySockets = io.sockets.adapter.rooms[roomId].sockets;
-                var socket;
-                i = 0;
-                for (var keySocket in keySockets) {
-                    socket = io.sockets.sockets[keySocket];
-                    if (socket.clientObject.isPosChange()) {
-                        Protocol_1.PackageProtocol.resStateEnemy.states[i] =
-                            {
-                                nickname: socket.clientObject._nickname,
-                                state: socket.clientObject._state,
-                                direction: socket.clientObject._direction,
-                                x: socket.clientObject._px,
-                                y: socket.clientObject._py,
-                                z: socket.clientObject._pz,
-                            };
-                        // console.log(PackageProtocol.resStateEnemy.states[i]);
-                        i++;
+            
+            socketClient.clientObject._room.startSchedule0(
+                function () {
+                    if (io.sockets.adapter.rooms[roomId] === undefined) {
+                        console.log("room sch error");
+                        return;
                     }
-                }
-                if (i > 0)
-                    io.sockets.in(roomId).emit('ResStateEnemy', Protocol_1.PackageProtocol.resStateEnemy);
-            }, 1000);
+
+                    PackageProtocol.resStateEnemy.states = [];
+                    var keySockets = io.sockets.adapter.rooms[roomId].sockets;
+                    var socket;
+                    i = 0;
+                    for (var keySocket in keySockets) {
+                        socket = io.sockets.sockets[keySocket];
+                        if (
+                            socket.clientObject.isPosChange()
+                        ) {
+                            socket.clientObject._req.nickname = socket.clientObject._nickname;
+                            PackageProtocol.resStateEnemy.states[i] = socket.clientObject._req;
+                            i++;
+                        }
+                    }
+
+                    if(i > 0) io.sockets.in(roomId).emit('ResStateEnemy', PackageProtocol.resStateEnemy);
+                },
+                1000
+
+            );
+            */
         }
         else {
             Protocol_1.PackageProtocol.resMatchWait.count_user = io.sockets.adapter.rooms[countRoom].length;
@@ -119,22 +121,16 @@ io.on("connection", (socketClient) => {
     });
     socketClient.on("ReqStatePlayer", (req) => {
         //console.log(req);
-        socketClient.clientObject.setPos(req.state, req.direction, req.px, req.py, req.pz);
-        /*
-        if (req.state === 0) {
-            PackageProtocol.resStateEnemy.states = [];
-            PackageProtocol.resStateEnemy.states[0] =
-            {
-                nickname: socketClient.clientObject._nickname,
-                state: socketClient.clientObject._state,
-                direction: socketClient.clientObject._direction,
-                x: socketClient.clientObject._px,
-                y: socketClient.clientObject._py,
-                z: socketClient.clientObject._pz,
-            };
-            socketClient.in(socketClient.clientObject._room._roomId).emit('ResStateEnemy', PackageProtocol.resStateEnemy); //���� �뿡 �ִ� �ش�Ŭ�󻩰� ������
-        }
-        */
+        socketClient.clientObject.setPos(req);
+        Protocol_1.PackageProtocol.resStateEnemy.nickname = socketClient.clientObject._nickname;
+        Protocol_1.PackageProtocol.resStateEnemy.state = socketClient.clientObject._req.state;
+        Protocol_1.PackageProtocol.resStateEnemy.direction = socketClient.clientObject._req.direction;
+        Protocol_1.PackageProtocol.resStateEnemy.speed = socketClient.clientObject._req.speed;
+        Protocol_1.PackageProtocol.resStateEnemy.px = socketClient.clientObject._req.px;
+        Protocol_1.PackageProtocol.resStateEnemy.py = socketClient.clientObject._req.py;
+        Protocol_1.PackageProtocol.resStateEnemy.pz = socketClient.clientObject._req.pz;
+        // PackageProtocol.resStateEnemy.time = new Date().getTime();
+        socketClient.in(socketClient.clientObject._room._roomId).emit('ResStateEnemy', Protocol_1.PackageProtocol.resStateEnemy); //���� �뿡 �ִ� �ش�Ŭ�󻩰� ������
     });
     socketClient.on("message", (req) => {
         // console.log(req);

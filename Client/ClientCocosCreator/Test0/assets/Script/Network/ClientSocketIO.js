@@ -109,11 +109,12 @@ ClientSocketIO.prototype = {
         );
     },
 
-    reqStatePlayer: function (state,direction,px,py,pz){
+    reqStatePlayer: function (state,direction,speed,px,py,pz){
         this._socket.emit("ReqStatePlayer", 
             {
                 state:state,
                 direction:direction,
+                speed:speed,
                 px: px,
                 py: py,
                 pz: pz,

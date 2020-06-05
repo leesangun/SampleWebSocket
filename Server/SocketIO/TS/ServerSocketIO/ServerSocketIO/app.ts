@@ -96,6 +96,7 @@ io.on("connection", (socketClient: any) => {
             }
             io.sockets.in(countRoom).emit('ResMatch', PackageProtocol.resMatch);
             countRoom++;
+            /*
             var roomId = socketClient.clientObject._room._roomId;
             
             socketClient.clientObject._room.startSchedule0(
@@ -111,20 +112,11 @@ io.on("connection", (socketClient: any) => {
                     i = 0;
                     for (var keySocket in keySockets) {
                         socket = io.sockets.sockets[keySocket];
-
                         if (
                             socket.clientObject.isPosChange()
                         ) {
-                            PackageProtocol.resStateEnemy.states[i] =
-                            {
-                                nickname: socket.clientObject._nickname,
-                                state: socket.clientObject._state,
-                                direction:socket.clientObject._direction,
-                                x: socket.clientObject._px,
-                                y: socket.clientObject._py,
-                                z: socket.clientObject._pz,
-                            };
-                           // console.log(PackageProtocol.resStateEnemy.states[i]);
+                            socket.clientObject._req.nickname = socket.clientObject._nickname;
+                            PackageProtocol.resStateEnemy.states[i] = socket.clientObject._req;
                             i++;
                         }
                     }
@@ -132,7 +124,9 @@ io.on("connection", (socketClient: any) => {
                     if(i > 0) io.sockets.in(roomId).emit('ResStateEnemy', PackageProtocol.resStateEnemy);
                 },
                 1000
+
             );
+            */
         } else {
             PackageProtocol.resMatchWait.count_user = io.sockets.adapter.rooms[countRoom].length;
             io.sockets.in(countRoom).emit('ResMatchWait', PackageProtocol.resMatchWait);
@@ -143,22 +137,18 @@ io.on("connection", (socketClient: any) => {
 
     socketClient.on("ReqStatePlayer", (req: PackageProtocol.ReqStatePlayer) => {
         //console.log(req);
-        socketClient.clientObject.setPos(req.state, req.direction, req.px, req.py, req.pz);
-        /*
-        if (req.state === 0) {
-            PackageProtocol.resStateEnemy.states = [];
-            PackageProtocol.resStateEnemy.states[0] =
-            {
-                nickname: socketClient.clientObject._nickname,
-                state: socketClient.clientObject._state,
-                direction: socketClient.clientObject._direction,
-                x: socketClient.clientObject._px,
-                y: socketClient.clientObject._py,
-                z: socketClient.clientObject._pz,
-            };
-            socketClient.in(socketClient.clientObject._room._roomId).emit('ResStateEnemy', PackageProtocol.resStateEnemy); //같은 룸에 있는 해당클라빼고 보내기
-        }
-        */
+        socketClient.clientObject.setPos(req);
+        
+        PackageProtocol.resStateEnemy.nickname = socketClient.clientObject._nickname;
+        PackageProtocol.resStateEnemy.state = socketClient.clientObject._req.state;
+        PackageProtocol.resStateEnemy.direction = socketClient.clientObject._req.direction;
+        PackageProtocol.resStateEnemy.speed = socketClient.clientObject._req.speed;
+        PackageProtocol.resStateEnemy.px = socketClient.clientObject._req.px;
+        PackageProtocol.resStateEnemy.py = socketClient.clientObject._req.py;
+        PackageProtocol.resStateEnemy.pz = socketClient.clientObject._req.pz;
+       // PackageProtocol.resStateEnemy.time = new Date().getTime();
+        socketClient.in(socketClient.clientObject._room._roomId).emit('ResStateEnemy', PackageProtocol.resStateEnemy); //같은 룸에 있는 해당클라빼고 보내기
+        
     });
 
     socketClient.on("message", (req: PackageProtocol.ReqMessage) => {

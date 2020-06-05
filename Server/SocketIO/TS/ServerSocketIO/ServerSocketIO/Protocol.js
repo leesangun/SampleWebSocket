@@ -18,9 +18,6 @@ var PackageProtocol;
     PackageProtocol.ResMatchWait = ResMatchWait;
     PackageProtocol.resMatchWait = new ResMatchWait();
     class ResStateEnemy {
-        constructor() {
-            this.states = [];
-        }
     }
     PackageProtocol.ResStateEnemy = ResStateEnemy;
     PackageProtocol.resStateEnemy = new ResStateEnemy();
